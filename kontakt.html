@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt — Under Klippen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="extras.css">
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-h) + 80px) 24px 80px;
+      text-align: center;
+      background: var(--c-cream);
+    }
+    .page-hero .eyebrow { display: inline-block; margin-bottom: 18px; }
+    .page-hero h1 {
+      font-size: clamp(56px, 8vw, 120px);
+      margin: 0 0 24px;
+      letter-spacing: -0.005em;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--c-accent); }
+    .page-hero .lede {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-ink-soft);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Contact info grid */
+    .kontakt-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 120px 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--c-rule);
+    }
+    .kontakt-col {
+      padding: 56px 32px;
+      border-right: 1px solid var(--c-rule);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .kontakt-col:last-child { border-right: none; }
+    .kontakt-col .eyebrow { margin-bottom: 6px; }
+    .kontakt-col h3 {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 28px;
+      margin: 0 0 6px;
+      color: var(--c-ink);
+    }
+    .kontakt-col p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--c-ink);
+      font-weight: 300;
+      margin: 0;
+    }
+    .kontakt-col a {
+      color: var(--c-accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .kontakt-col a:hover { border-bottom-color: var(--c-accent); }
+    .kontakt-col .label-soft {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+      font-weight: 400;
+      margin-top: 6px;
+    }
+    @media (max-width: 880px) {
+      .kontakt-grid { grid-template-columns: 1fr; padding: 80px 24px; }
+      .kontakt-col { border-right: none; border-bottom: 1px solid var(--c-rule); }
+      .kontakt-col:last-child { border-bottom: none; }
+    }
+
+    /* Wide image break */
+    .kontakt-image {
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+    }
+    .kontakt-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Contact form */
+    .kontakt-form-section {
+      background: var(--c-dark);
+      color: var(--c-light-text);
+      padding: 140px 24px;
+    }
+    .kontakt-form-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .kontakt-form-inner h2 {
+      font-size: clamp(40px, 5vw, 72px);
+      margin: 18px 0 28px;
+    }
+    .kontakt-form-inner h2 em { font-style: italic; color: var(--c-accent); }
+    .kontakt-form-inner p {
+      font-weight: 300;
+      line-height: 1.8;
+      margin: 0 0 24px;
+      opacity: 0.92;
+    }
+
+    .form-grid {
+      background: var(--c-mid);
+      padding: 40px;
+    }
+    .form-row { margin-bottom: 22px; }
+    .form-row label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--c-light-text);
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(232,222,205,0.25);
+      color: var(--c-light-text);
+      font-family: var(--f-display);
+      font-size: 18px;
+      padding: 8px 0;
+      transition: border-color var(--t-fast);
+    }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+      outline: none;
+      border-bottom-color: var(--c-accent);
+    }
+    .form-row textarea { min-height: 100px; resize: vertical; }
+    .form-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .form-grid .btn-solid { width: 100%; margin-top: 12px; }
+    @media (max-width: 880px) {
+      .kontakt-form-inner { grid-template-columns: 1fr; gap: 56px; }
+      .form-pair { grid-template-columns: 1fr; }
+    }
+
+    /* Find os section */
+    .findos {
+      padding: 140px 36px;
+      background: var(--c-cream-warm);
+      text-align: center;
+    }
+    .findos .eyebrow { margin-bottom: 18px; display: inline-block; }
+    .findos h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      margin: 0 0 32px;
+    }
+    .findos h2 em { font-style: italic; color: var(--c-accent); }
+    .findos .addr {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 26px;
+      color: var(--c-ink);
+      line-height: 1.5;
+      margin: 0 0 28px;
+    }
+    .findos .map-link {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--c-accent);
+      padding-bottom: 4px;
+    }
+
+    .nav-link.is-active { color: var(--c-accent); }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <button class="nav-burger" aria-label="Menu"><span></span><span></span></button>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Forside</a>
+    <a class="nav-link" href="menu.html">Menu &amp; Vinkort</a>
+    <a class="nav-link" href="om-os.html">Om os</a>
+    <a class="nav-link" href="selskaber.html">Selskaber</a>
+    <a class="nav-link is-active" href="kontakt.html">Kontakt</a>
+    <a class="nav-link" href="index.html#gavekort">Gavekort ↓</a>
+  </nav>
+  <a class="nav-wordmark" href="index.html">UNDER&nbsp;KLIPPEN</a>
+  <div class="nav-right">
+    <a class="btn-outline" href="#skriv">Skriv til os</a>
+  </div>
+</header>
+
+<section class="page-hero" data-screen-label="01 Hero">
+  <span class="eyebrow reveal">— Kontakt —</span>
+  <h1 class="display reveal" data-delay="1">
+    Sig <em>hej.</em>
+  </h1>
+  <p class="lede reveal" data-delay="2">
+    Til en bordreservation, et spørgsmål, en idé — eller bare for at høre, om vi har plads i morgen.
+  </p>
+</section>
+
+<!-- 3-column contact info -->
+<div class="kontakt-grid">
+  <div class="kontakt-col reveal">
+    <span class="eyebrow">— Ring eller skriv —</span>
+    <h3>Vi svarer hurtigt.</h3>
+    <p>
+      <a href="tel:+4597406655">+45 97 40 66 55</a><br>
+      <a href="mailto:mail@underklippen.dk">mail@underklippen.dk</a>
+    </p>
+    <p class="label-soft">— Telefonen tages tirsdag–lørdag</p>
+  </div>
+
+  <div class="kontakt-col reveal" data-delay="1">
+    <span class="eyebrow">— Find os —</span>
+    <h3>Bag klippen.</h3>
+    <p>
+      Lille Østergade 3<br>
+      7500 Holstebro
+    </p>
+    <p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Lille+%C3%98stergade+3+7500+Holstebro" target="_blank" rel="noopener">Vis på kort →</a>
+    </p>
+    <p class="label-soft">— Indgangen er ved klippen, ikke til at overse</p>
+  </div>
+
+  <div class="kontakt-col reveal" data-delay="2">
+    <span class="eyebrow">— Åbningstider —</span>
+    <h3>Når lyset er tændt.</h3>
+    <p>
+      Onsdag — lørdag<br>
+      12.00 — 24.00
+    </p>
+    <p>
+      Søndag — tirsdag<br>
+      <em>Åben efter aftale</em>
+    </p>
+    <p class="label-soft">— Selskaber kan booke alle ugens dage</p>
+  </div>
+</div>
+
+<!-- Image break -->
+<div class="kontakt-image reveal">
+  <img src="assets/exterior-wide.jpg" alt="Under Klippen, set udefra" />
+</div>
+
+<!-- Contact form -->
+<section id="skriv" class="kontakt-form-section">
+  <div class="kontakt-form-inner">
+    <div class="reveal">
+      <span class="eyebrow">— Skriv til os —</span>
+      <h2 class="display">Et par <em>linjer</em> er nok.</h2>
+      <p>
+        Bordreservationer foregår nemmest via vores online-booking eller direkte
+        på telefonen. Skriver du til os om noget andet — et spørgsmål, en
+        særlig anledning, allergier — så hører du fra os indenfor en arbejdsdag.
+      </p>
+      <p style="font-family: var(--f-display); font-size: 22px; color: var(--c-accent); margin-top: 32px;">
+        mail@underklippen.dk<br>
+        +45 97 40 66 55
+      </p>
+      <p style="font-size: 13px; opacity: 0.7; margin-top: 32px;">
+        Tirsdag–lørdag · 10.00–17.00
+      </p>
+    </div>
+
+    <form class="form-grid reveal" data-delay="1" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Tak — vi vender tilbage hurtigt'; this.querySelector('button').disabled = true;">
+      <div class="form-pair">
+        <div class="form-row">
+          <label>Navn</label>
+          <input type="text" required>
+        </div>
+        <div class="form-row">
+          <label>Telefon</label>
+          <input type="tel">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" required>
+      </div>
+      <div class="form-row">
+        <label>Hvad drejer det sig om?</label>
+        <select>
+          <option>Bordreservation</option>
+          <option>Spørgsmål til menu / allergier</option>
+          <option>Selskab</option>
+          <option>Gavekort</option>
+          <option>Presse</option>
+          <option>Andet</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Skriv et par linjer</label>
+        <textarea placeholder="Hvad kan vi hjælpe med?"></textarea>
+      </div>
+      <button type="submit" class="btn-solid">Send</button>
+    </form>
+  </div>
+</section>
+
+<!-- Find os -->
+<section class="findos">
+  <span class="eyebrow reveal">— Adressen —</span>
+  <h2 class="display reveal" data-delay="1">
+    Vi <em>flytter</em> ikke.
+  </h2>
+  <p class="addr reveal" data-delay="2">
+    Lille Østergade 3<br>
+    7500 Holstebro
+  </p>
+  <p class="reveal" data-delay="3">
+    <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Lille+%C3%98stergade+3+7500+Holstebro" target="_blank" rel="noopener">Åbn i Google Maps →</a>
+  </p>
+</section>
+
+<!-- Footer -->
+<footer class="footer" data-tone="dark">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-white.png" alt="Under Klippen" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
+      <p style="font-size: 14px; max-width: 360px; opacity: 0.85; font-weight: 300; line-height: 1.7;">
+        Lille Østergade 3, 7500 Holstebro.<br>
+        Casual fine dining bag klippen.<br>
+        Tre stjerner i Den Danske Spiseguide.
+      </p>
+    </div>
+    <div>
+      <h4>Restaurant</h4>
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="menu.html#vin">Vinkort</a></li>
+        <li><a href="om-os.html">Om os</a></li>
+        <li><a href="selskaber.html">Selskaber</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Praktisk</h4>
+      <ul>
+        <li><a href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
+        <li><a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener">Gavekort</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Følg med</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/underklippen/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/underklippen" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="#">Nyhedsbrev</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Restaurant Under Klippen</span>
+    <span>Lille Østergade 3 · 7500 Holstebro · +45 97 40 66 55</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="tweaks.js"></script>
+</body>
+</html>

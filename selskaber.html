@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selskaber — Under Klippen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="extras.css">
+  <style>
+    .page-hero {
+      padding: calc(var(--nav-h) + 80px) 24px 80px;
+      text-align: center;
+      background: var(--c-cream);
+    }
+    .page-hero .eyebrow { display: inline-block; margin-bottom: 18px; }
+    .page-hero h1 {
+      font-size: clamp(56px, 8vw, 120px);
+      margin: 0 0 24px;
+      letter-spacing: -0.005em;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--c-accent); }
+    .page-hero .lede {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-ink-soft);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .image-pair-wide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .image-pair-wide .pair-frame { aspect-ratio: 4/3; overflow: hidden; }
+    .image-pair-wide img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 720px) { .image-pair-wide { grid-template-columns: 1fr; } }
+
+    /* Capacity cards */
+    .capacity {
+      padding: 140px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .capacity-head { text-align: center; margin-bottom: 80px; }
+    .capacity-head h2 { font-size: clamp(40px, 5vw, 64px); margin: 12px 0 0; }
+    .capacity-head h2 em { font-style: italic; color: var(--c-accent); }
+
+    .capacity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .cap-card {
+      padding: 56px 36px;
+      border-left: 1px solid var(--c-rule);
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 18px;
+    }
+    .cap-card:first-child { border-left: none; }
+    .cap-card .cap-num {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 80px;
+      line-height: 1;
+    }
+    .cap-card .cap-num em {
+      font-style: italic;
+      color: var(--c-accent);
+      font-size: 22px;
+      margin-left: 4px;
+    }
+    .cap-card h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 28px;
+      margin: 0;
+    }
+    .cap-card .lbl {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+    }
+    .cap-card p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--c-ink-soft); font-weight: 300; }
+    .cap-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+      font-size: 13px;
+      color: var(--c-ink-soft);
+      font-weight: 300;
+      line-height: 1.9;
+    }
+    .cap-card ul li::before {
+      content: "—";
+      color: var(--c-accent);
+      margin-right: 10px;
+    }
+    @media (max-width: 880px) {
+      .capacity-grid { grid-template-columns: 1fr; }
+      .cap-card { border-left: none; border-top: 1px solid var(--c-rule); }
+      .cap-card:first-child { border-top: none; }
+    }
+
+    /* Occasions */
+    .occasions {
+      background: var(--c-cream-warm);
+      padding: 140px 24px;
+    }
+    .occasions-inner { max-width: 1100px; margin: 0 auto; }
+    .occasions-head { text-align: center; margin-bottom: 80px; }
+    .occasions-head h2 { font-size: clamp(40px, 5vw, 64px); margin: 12px 0 0; }
+    .occasions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--c-rule);
+    }
+    .occ {
+      background: var(--c-cream-warm);
+      padding: 48px 40px;
+    }
+    .occ h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 28px;
+      margin: 0 0 12px;
+    }
+    .occ p { margin: 0; font-size: 14px; color: var(--c-ink-soft); line-height: 1.7; font-weight: 300; }
+    @media (max-width: 720px) { .occasions-grid { grid-template-columns: 1fr; } }
+
+    /* Process timeline */
+    .process {
+      padding: 140px 24px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .process-head { text-align: center; margin-bottom: 64px; }
+    .process-head h2 { font-size: clamp(40px, 5vw, 56px); margin: 12px 0 0; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 32px;
+      padding: 36px 0;
+      border-top: 1px solid var(--c-rule);
+    }
+    .step:last-child { border-bottom: 1px solid var(--c-rule); }
+    .step .nr {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: 36px;
+      color: var(--c-accent);
+      line-height: 1;
+    }
+    .step h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 24px;
+      margin: 0 0 8px;
+    }
+    .step p { margin: 0; color: var(--c-ink-soft); font-weight: 300; line-height: 1.7; }
+
+    /* Contact CTA */
+    .selsk-cta {
+      background: var(--c-dark);
+      color: var(--c-light-text);
+      padding: 140px 24px;
+    }
+    .selsk-cta-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .selsk-cta h2 {
+      font-size: clamp(40px, 5vw, 72px);
+      margin: 18px 0 28px;
+    }
+    .selsk-cta h2 em { font-style: italic; color: var(--c-accent); }
+    .selsk-cta p { font-weight: 300; line-height: 1.8; margin: 0 0 24px; opacity: 0.92; }
+
+    .form-grid {
+      background: var(--c-mid);
+      padding: 40px;
+    }
+    .form-row { margin-bottom: 22px; }
+    .form-row label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: 8px;
+    }
+    .form-row input, .form-row textarea, .form-row select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--c-rule-light);
+      color: var(--c-light-text);
+      padding: 10px 0;
+      font-family: var(--f-body);
+      font-size: 15px;
+      transition: border-color var(--t-fast);
+    }
+    .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+      outline: none;
+      border-bottom-color: var(--c-accent);
+    }
+    .form-row textarea { min-height: 80px; resize: vertical; }
+    .form-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .form-grid .btn-solid { width: 100%; margin-top: 12px; }
+    @media (max-width: 880px) {
+      .selsk-cta-inner { grid-template-columns: 1fr; gap: 56px; }
+      .form-pair { grid-template-columns: 1fr; }
+    }
+
+    /* Direct contact panel */
+    .direct {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      text-align: center;
+    }
+    .direct > div { padding: 24px; border-left: 1px solid var(--c-rule); }
+    .direct > div:first-child { border-left: none; }
+    .direct h4 { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--c-accent); margin: 0 0 14px; font-weight: 400; }
+    .direct p { margin: 0; font-family: var(--f-display); font-size: 22px; font-weight: 400; }
+    @media (max-width: 720px) {
+      .direct { grid-template-columns: 1fr; }
+      .direct > div { border-left: none; border-top: 1px solid var(--c-rule); }
+      .direct > div:first-child { border-top: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <button class="nav-burger" aria-label="Menu"><span></span><span></span></button>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Forside</a>
+    <a class="nav-link" href="menu.html">Menu &amp; Vinkort</a>
+    <a class="nav-link" href="om-os.html">Om os</a>
+    <a class="nav-link is-active" href="selskaber.html">Selskaber</a>
+    <a class="nav-link" href="kontakt.html">Kontakt</a>
+    <a class="nav-link" href="index.html#events">Events ↓</a>
+    <a class="nav-link" href="index.html#gavekort">Gavekort ↓</a>
+  </nav>
+  <a class="nav-wordmark" href="index.html">UNDER&nbsp;KLIPPEN</a>
+  <div class="nav-right">
+    <a class="btn-outline" href="#kontakt">Book bord</a>
+  </div>
+</header>
+
+<section class="page-hero" data-screen-label="01 Hero">
+  <span class="eyebrow reveal">— Selskaber &amp; private aftener —</span>
+  <h1 class="display reveal" data-delay="1">
+    Hold det <em>her.</em>
+  </h1>
+  <p class="lede reveal" data-delay="2">
+    Bryllup, runde fødselsdag, firma der vil noget mere — vi laver aftener, folk husker.
+  </p>
+</section>
+
+<!-- Image pair -->
+<section class="reveal" style="padding: 0;">
+  <div class="image-pair-wide">
+    <div class="pair-frame"><img src="assets/madogvin.jpg" alt="Selskab ved bordet" /></div>
+    <div class="pair-frame"><img src="assets/drinks.jpg" alt="Bartender hælder cocktail op" /></div>
+  </div>
+</section>
+
+<!-- CAPACITY -->
+<section class="capacity">
+  <div class="capacity-head reveal">
+    <span class="eyebrow">— Plads til jer —</span>
+    <h2 class="display">Tre <em>rum</em>, samme køkken.</h2>
+  </div>
+
+  <div class="capacity-grid">
+    <article class="cap-card reveal">
+      <div class="lbl">Det lille bord</div>
+      <div class="cap-num">8<em>—</em>14</div>
+      <h3>Privat bord i restauranten</h3>
+      <p>Et langbord ved klippevinduet. Egen menu, samme stemning som husets gæster — bare lidt mere jer.</p>
+      <ul>
+        <li>Egen menu</li>
+        <li>Personalets fulde opmærksomhed</li>
+        <li>Onsdag–lørdag</li>
+      </ul>
+    </article>
+    <article class="cap-card reveal" data-delay="1">
+      <div class="lbl">Det private rum</div>
+      <div class="cap-num">14<em>—</em>28</div>
+      <h3>Vinrummet</h3>
+      <p>Bag glasset, mellem hylderne. Til middage, vinaftener og forretninger der skal lukkes.</p>
+      <ul>
+        <li>Lukket rum</li>
+        <li>Egen sommelier</li>
+        <li>AV til præsentationer</li>
+      </ul>
+    </article>
+    <article class="cap-card reveal" data-delay="2">
+      <div class="lbl">Hele huset</div>
+      <div class="cap-num">42<em>—</em>60</div>
+      <h3>Eksklusiv leje</h3>
+      <p>Hele restauranten. Til bryllupper, runde tal og firmajubilæer hvor det skal være jer alene. Inkl. terrassen om sommeren.</p>
+      <ul>
+        <li>Hele huset til rådighed</li>
+        <li>Skræddersyet menu</li>
+        <li>Velkomstdrink ved klippen</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- OCCASIONS -->
+<section class="occasions">
+  <div class="occasions-inner">
+    <div class="occasions-head reveal">
+      <span class="eyebrow">— Anledninger —</span>
+      <h2 class="display">Det vi har gjort før, og gør gerne igen.</h2>
+    </div>
+
+    <div class="occasions-grid">
+      <div class="occ reveal">
+        <h3>Bryllupsmiddage</h3>
+        <p>Op til 60. Vi arrangerer det meste — fra ankomst til kaffe. Brudeparrets favoritret findes altid en plads til.</p>
+      </div>
+      <div class="occ reveal" data-delay="1">
+        <h3>Runde fødselsdage</h3>
+        <p>50, 60, 70 og dem der ikke er runde, men tæller. Tale når kødet kommer ind, sang når desserten gør.</p>
+      </div>
+      <div class="occ reveal">
+        <h3>Forretningsmiddage</h3>
+        <p>Når aftalen skal lukkes over noget, der smager af mere end konferencehotel. Diskret, præcist, godt.</p>
+      </div>
+      <div class="occ reveal" data-delay="1">
+        <h3>Vinaftener</h3>
+        <p>Vi designer aftenen omkring en region, en producent eller en bestemt drue. Op til 28 i Vinrummet.</p>
+      </div>
+      <div class="occ reveal">
+        <h3>Konfirmationer &amp; barnedåb</h3>
+        <p>Frokost eller tidlig aften. Vi tager hensyn til de unge — også i menuen.</p>
+      </div>
+      <div class="occ reveal" data-delay="1">
+        <h3>Receptioner</h3>
+        <p>Stående, gående, snakkende. Snacks fra køkkenet, bobler ved indgangen, klippen som kulisse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-head reveal">
+    <span class="eyebrow">— Sådan gør vi —</span>
+    <h2 class="display">Fire skridt. Ingen <em>spørgeskemaer.</em></h2>
+  </div>
+
+  <div class="step reveal">
+    <div class="nr">i.</div>
+    <div>
+      <h4>I skriver eller ringer</h4>
+      <p>Fortæl hvad det er, hvor mange I er, og hvilken dato I tænker. Det behøver ikke være færdigtænkt.</p>
+    </div>
+  </div>
+  <div class="step reveal">
+    <div class="nr">ii.</div>
+    <div>
+      <h4>Vi ringer tilbage</h4>
+      <p>Ismael ringer indenfor en arbejdsdag. Vi taler menu, vin, rum, budget, og hvad der gør jer glade.</p>
+    </div>
+  </div>
+  <div class="step reveal">
+    <div class="nr">iii.</div>
+    <div>
+      <h4>I får et oplæg</h4>
+      <p>Konkret menu, konkret pris, konkrete vine. Skriftligt. Lavet til jer, ikke et standardkort.</p>
+    </div>
+  </div>
+  <div class="step reveal">
+    <div class="nr">iv.</div>
+    <div>
+      <h4>I kommer og spiser</h4>
+      <p>Vi tager imod. I lader os om resten. På et tidspunkt mellem hovedretten og desserten kigger køkkenchefen ud — det gør han altid.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + FORM -->
+<section id="kontakt" class="selsk-cta" data-tone="dark">
+  <div class="selsk-cta-inner">
+    <div class="reveal">
+      <span class="eyebrow">— Kontakt —</span>
+      <h2 class="display">Skriv til <em>Ismael.</em></h2>
+      <p>
+        Vores ejer Ismael Aydoganer tager sig af alle henvendelser om selskaber.
+        Skriv et par linjer — eller ring direkte. Vi svarer hurtigt.
+      </p>
+      <p style="font-family: var(--f-display); font-size: 22px; color: var(--c-accent); margin-top: 32px;">
+        mail@underklippen.dk<br>
+        +45 97 40 66 55
+      </p>
+      <p style="font-size: 13px; opacity: 0.7; margin-top: 32px;">
+        Tirsdag–lørdag · 10.00–17.00
+      </p>
+      <div style="margin-top: 32px;">
+        <a href="https://underklippen.dk/selskaber/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjcyMSIsInRvZ2dsZSI6ZmFsc2V9" target="_blank" rel="noopener" class="btn-ghost" style="color: var(--c-accent);">Se selskabsmenuen <span class="arrow"></span></a>
+      </div>
+    </div>
+
+    <form class="form-grid reveal" data-delay="1" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Tak — vi svarer hurtigt'; this.querySelector('button').disabled = true;">
+      <div class="form-pair">
+        <div class="form-row">
+          <label>Navn</label>
+          <input type="text" required>
+        </div>
+        <div class="form-row">
+          <label>Telefon</label>
+          <input type="tel" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" required>
+      </div>
+      <div class="form-pair">
+        <div class="form-row">
+          <label>Antal gæster</label>
+          <input type="number" min="2" placeholder="14">
+        </div>
+        <div class="form-row">
+          <label>Anledning</label>
+          <select>
+            <option>Bryllup</option>
+            <option>Rund fødselsdag</option>
+            <option>Forretningsmiddag</option>
+            <option>Vinaften</option>
+            <option>Konfirmation / barnedåb</option>
+            <option>Reception</option>
+            <option>Andet</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Dato (hvis I har en)</label>
+        <input type="text" placeholder="14. september 2026">
+      </div>
+      <div class="form-row">
+        <label>Fortæl os lidt mere</label>
+        <textarea placeholder="Hvad er aftenen? Hvad drømmer I om?"></textarea>
+      </div>
+      <button type="submit" class="btn-solid">Send forespørgsel</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" data-tone="dark">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-white.png" alt="Under Klippen" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
+      <p style="font-size: 14px; max-width: 360px; opacity: 0.85; font-weight: 300; line-height: 1.7;">
+        Lille Østergade 3, 7500 Holstebro.<br>
+        Casual fine dining bag klippen.<br>
+        Tre stjerner i Den Danske Spiseguide.
+      </p>
+    </div>
+    <div>
+      <h4>Restaurant</h4>
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="menu.html#vin">Vinkort</a></li>
+        <li><a href="om-os.html">Om os</a></li>
+        <li><a href="selskaber.html">Selskaber</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Praktisk</h4>
+      <ul>
+        <li><a href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
+        <li><a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener">Gavekort</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Følg med</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/underklippen/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/underklippen" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="#">Nyhedsbrev</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Restaurant Under Klippen</span>
+    <span>Lille Østergade 3 · 7500 Holstebro · +45 97 40 66 55</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="tweaks.js"></script>
+</body>
+</html>

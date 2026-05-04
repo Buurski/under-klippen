@@ -1,0 +1,95 @@
+/* Mobile drawer styles + extra small bits */
+
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--c-dark);
+  color: var(--c-light-text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+  display: grid;
+  place-items: center;
+}
+.nav-drawer.is-open { opacity: 1; pointer-events: auto; }
+.nav-drawer nav { display: flex; flex-direction: column; gap: 22px; align-items: center; text-align: center; }
+.nav-drawer nav a {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+}
+.nav-drawer nav a.cta {
+  margin-top: 24px;
+  font-family: var(--f-body);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border: 1px solid var(--c-accent);
+  color: var(--c-accent);
+  padding: 14px 28px;
+}
+.nav-drawer-close {
+  position: absolute;
+  top: 18px; right: 22px;
+  width: 44px; height: 44px;
+  background: transparent;
+  border: none;
+  color: var(--c-light-text);
+  font-size: 32px;
+  cursor: pointer;
+  font-family: var(--f-display);
+}
+
+/* Logo badge (used in dark hero panel) */
+.logo-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  color: var(--c-light-text);
+}
+.logo-badge .brand-row {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.logo-badge .brand-mark {
+  width: 320px;
+  max-width: 70vw;
+  height: auto;
+  display: block;
+}
+@media (max-width: 880px) {
+  .logo-badge .brand-mark { width: 260px; }
+}
+.logo-badge .est {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-top: 8px;
+}
+.logo-badge .stars {
+  display: flex; gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--c-accent);
+  margin-top: 24px;
+  font-family: var(--f-body);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.logo-badge .stars .dots { letter-spacing: 0.3em; }
+
+/* Diamond/rock decoration */
+.rock-mark {
+  width: 28px; height: 28px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+  display: inline-block;
+}

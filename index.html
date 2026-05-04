@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Under Klippen — Restaurant i Holstebro</title>
+  <meta name="description" content="Restaurant Under Klippen ligger bogstaveligt talt under en klippe midt i Holstebro. Casual fine dining, dagsfriske råvarer, tre stjerner i Den Danske Spiseguide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="extras.css">
+  <style>
+    /* ===== Page-specific (Forside) ===== */
+
+    /* HERO -------------------------------------------------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 40fr 60fr;
+      height: 100vh;
+      min-height: 720px;
+      width: 100%;
+    }
+    .hero-left {
+      background: var(--c-dark);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(200,168,122,0.10), transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(200,168,122,0.06), transparent 55%);
+      pointer-events: none;
+    }
+    .hero-left .logo-badge {
+      transform: translateY(20px);
+      opacity: 0;
+      animation: heroIn 1.2s var(--ease) 0.45s forwards;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes heroIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right .parallax-inner {
+      position: absolute;
+      inset: -10% 0;
+      will-change: transform;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-right::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,18,8,0.18), transparent 30%, transparent 70%, rgba(26,18,8,0.32));
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      position: absolute;
+      bottom: 40px; left: 40px;
+      color: var(--c-light-text);
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+      opacity: 0;
+      animation: heroIn 1.2s var(--ease) 0.9s forwards;
+      max-width: 460px;
+    }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; height: auto; min-height: 0; }
+      .hero-left { padding: 100px 24px 80px; }
+      .hero-right { aspect-ratio: 4/5; }
+      .hero-tagline { font-size: 18px; left: 24px; bottom: 24px; }
+    }
+
+    /* SCROLL CUE ------------------------------------------- */
+    .scroll-cue {
+      position: relative;
+      height: 96px;
+      display: grid; place-items: center;
+      background: var(--c-cream);
+    }
+    .scroll-cue .arrow {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(180deg, transparent, var(--c-ink-soft), transparent);
+      animation: scrollArrow 2.4s var(--ease) infinite;
+      position: relative;
+    }
+    .scroll-cue .arrow::after {
+      content: "";
+      position: absolute; left: -3px; bottom: 0;
+      width: 7px; height: 7px;
+      border-bottom: 1px solid var(--c-ink-soft);
+      border-right: 1px solid var(--c-ink-soft);
+      transform: rotate(45deg);
+    }
+    @keyframes scrollArrow {
+      0%   { opacity: 0; transform: translateY(-20px); }
+      40%  { opacity: 1; }
+      100% { opacity: 0; transform: translateY(20px); }
+    }
+
+    /* INTRO ------------------------------------------------ */
+    .intro h1 {
+      font-size: clamp(36px, 5.4vw, 72px);
+      margin: 0 0 28px;
+    }
+    .intro p { margin: 0; }
+    .intro .stars-line {
+      margin-top: 32px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+    }
+    .intro .stars-line .dots { letter-spacing: 0.4em; margin-right: 10px; color: var(--c-accent); }
+
+    /* INFO STRIP ------------------------------------------- */
+    .info-strip {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      text-align: center;
+    }
+    .info-col {
+      padding: 8px 32px;
+      position: relative;
+    }
+    .info-col + .info-col {
+      border-left: 1px solid var(--c-rule);
+    }
+    .info-col h3 {
+      font-family: var(--f-body);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--c-accent);
+      margin: 0 0 18px;
+    }
+    .info-col p { margin: 0; font-size: 14px; line-height: 1.8; font-weight: 300; }
+    .info-col .deco {
+      width: 36px; height: 36px;
+      margin: 0 auto 18px;
+      border: 1px solid var(--c-ink-soft);
+      transform: rotate(45deg);
+      position: relative;
+    }
+    .info-col .deco::after {
+      content: "";
+      position: absolute; inset: 6px;
+      border: 1px solid var(--c-accent);
+    }
+    .info-col em.label {
+      display: block;
+      font-style: normal;
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--c-ink-soft);
+      margin-top: 4px;
+    }
+    @media (max-width: 720px) {
+      .info-strip { grid-template-columns: 1fr; }
+      .info-col + .info-col { border-left: none; border-top: 1px solid var(--c-rule); padding-top: 40px; margin-top: 40px; }
+    }
+
+    /* MENU TEASER ------------------------------------------ */
+    .menu-teaser {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .menu-teaser h2 {
+      font-size: clamp(48px, 7vw, 96px);
+      margin: 0 0 8px;
+    }
+    .menu-teaser .sub {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--c-accent);
+      margin-bottom: 56px;
+    }
+    .courses {
+      display: grid;
+      gap: 0;
+      text-align: left;
+      margin-top: 40px;
+    }
+    .course {
+      padding: 28px 12px;
+      border-bottom: 1px solid var(--c-rule);
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+    }
+    .course:first-child { border-top: 1px solid var(--c-rule); }
+    .course .num {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--c-accent);
+    }
+    .course h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 22px;
+      margin: 0 0 4px;
+    }
+    .course p { margin: 0; font-size: 13px; color: var(--c-ink-soft); font-weight: 300; line-height: 1.6; }
+    .course .price {
+      font-family: var(--f-body);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--c-ink-soft);
+      text-transform: uppercase;
+    }
+    @media (max-width: 600px) {
+      .course { grid-template-columns: 36px 1fr; }
+      .course .price { grid-column: 2; padding-top: 8px; }
+    }
+
+    .menu-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      margin-top: 56px;
+      border-top: 1px solid var(--c-rule);
+      border-left: 1px solid var(--c-rule);
+    }
+    .menu-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 36px 28px 32px;
+      border-right: 1px solid var(--c-rule);
+      border-bottom: 1px solid var(--c-rule);
+      text-decoration: none;
+      color: var(--c-ink);
+      transition: background 0.4s ease, transform 0.4s ease;
+      text-align: left;
+      min-height: 280px;
+      position: relative;
+    }
+    .menu-card:hover {
+      background: var(--c-cream);
+    }
+    .menu-card .mc-tag {
+      position: absolute;
+      top: 16px; right: 20px;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      border: 1px solid var(--c-accent);
+      padding: 4px 8px;
+      font-weight: 500;
+    }
+    .menu-card .mc-num {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 28px;
+      color: var(--c-accent);
+      letter-spacing: 0.04em;
+    }
+    .menu-card h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+      margin: 0;
+      color: var(--c-ink);
+      line-height: 1.2;
+    }
+    .menu-card p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--c-ink-soft);
+      font-weight: 300;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .menu-card .mc-foot {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 1px solid var(--c-rule);
+    }
+    .menu-card .mc-price {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-ink);
+      letter-spacing: 0.01em;
+    }
+    .menu-card .mc-link {
+      font-family: var(--f-body);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-card .mc-link .arrow {
+      width: 18px; height: 1px;
+      background: var(--c-accent);
+      position: relative;
+      transition: width 0.3s ease;
+    }
+    .menu-card .mc-link .arrow::after {
+      content: ''; position: absolute; right: 0; top: -2px;
+      width: 5px; height: 5px;
+      border-top: 1px solid var(--c-accent);
+      border-right: 1px solid var(--c-accent);
+      transform: rotate(45deg); transform-origin: top right;
+    }
+    .menu-card:hover .mc-link .arrow { width: 28px; }
+
+    /* KLIPPEN ATMOSPHERIC ---------------------------------- */
+    .klippen {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--c-dark);
+      color: var(--c-light-text);
+      overflow: hidden;
+    }
+    .klippen-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .klippen-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.7) saturate(0.95);
+    }
+    .klippen-img::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 60%, rgba(26,18,8,0.6));
+    }
+    .klippen-text {
+      padding: 120px 80px;
+      display: grid;
+      align-content: center;
+      max-width: 640px;
+    }
+    .klippen-text h2 {
+      font-size: clamp(40px, 5.4vw, 72px);
+      margin: 24px 0 32px;
+    }
+    .klippen-text h2 em {
+      font-style: italic;
+      color: var(--c-accent);
+      font-weight: 300;
+    }
+    .klippen-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      font-weight: 300;
+      opacity: 0.92;
+      margin: 0 0 24px;
+    }
+    @media (max-width: 880px) {
+      .klippen { grid-template-columns: 1fr; min-height: 0; }
+      .klippen-img { aspect-ratio: 5/4; }
+      .klippen-text { padding: 80px 28px; }
+    }
+
+    /* EVENTS ----------------------------------------------- */
+    .events {
+      padding: 140px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .events-head { text-align: center; margin-bottom: 80px; }
+    .events-head h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      margin: 12px 0 0;
+    }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .event-card {
+      padding: 48px 36px;
+      border-left: 1px solid var(--c-rule);
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 14px;
+      transition: background var(--t-fast);
+    }
+    .event-card:first-child { border-left: none; }
+    .event-card:hover { background: rgba(200,168,122,0.05); }
+    .event-card .date {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .event-card .date em {
+      font-style: italic;
+      color: var(--c-accent);
+      font-size: 22px;
+      margin-left: 4px;
+    }
+    .event-card .month {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+    }
+    .event-card h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 28px;
+      margin: 0;
+    }
+    .event-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--c-ink-soft);
+      font-weight: 300;
+      margin: 0;
+    }
+    .event-card .meta {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+      padding-top: 16px;
+      border-top: 1px solid var(--c-rule);
+    }
+    @media (max-width: 880px) {
+      .events-grid { grid-template-columns: 1fr; }
+      .event-card { border-left: none; border-top: 1px solid var(--c-rule); }
+      .event-card:first-child { border-top: none; }
+    }
+
+    /* GAVEKORT --------------------------------------------- */
+    .gavekort {
+      background: var(--c-mid);
+      color: var(--c-light-text);
+      padding: 160px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gavekort::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(200,168,122,0.08), transparent 60%);
+      pointer-events: none;
+    }
+    .gavekort .eyebrow { display: block; margin-bottom: 24px; }
+    .gavekort h2 {
+      font-size: clamp(48px, 6vw, 80px);
+      margin: 0 0 28px;
+      max-width: 800px;
+      margin-inline: auto;
+      position: relative;
+    }
+    .gavekort p {
+      font-size: 17px;
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 540px;
+      margin: 0 auto 56px;
+      opacity: 0.92;
+      position: relative;
+    }
+    .gavekort .btn-solid { position: relative; }
+    .gavekort .small {
+      display: block;
+      margin-top: 32px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      position: relative;
+    }
+
+    /* Wide image break ------------------------------------ */
+    .wide-photo {
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+      position: relative;
+    }
+    .wide-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .wide-photo .caption-overlay {
+      position: absolute;
+      left: 50%;
+      bottom: 40px;
+      transform: translateX(-50%);
+      color: var(--c-light-text);
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+    }
+
+    /* Section header centered with eyebrow + rule --------- */
+    .sec-head {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .sec-head .rule {
+      display: inline-block;
+      width: 40px; height: 1px;
+      background: var(--c-accent);
+      margin-bottom: 20px;
+    }
+    .sec-head h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      margin: 12px 0 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <button class="nav-burger" aria-label="Menu"><span></span><span></span></button>
+  <nav class="nav-links">
+    <a class="nav-link is-active" href="index.html">Forside</a>
+    <a class="nav-link" href="menu.html">Menu &amp; Vinkort</a>
+    <a class="nav-link" href="om-os.html">Om os</a>
+    <a class="nav-link" href="selskaber.html">Selskaber</a>
+    <a class="nav-link" href="kontakt.html">Kontakt</a>
+    <a class="nav-link" href="#events">Events ↓</a>
+    <a class="nav-link" href="#gavekort">Gavekort ↓</a>
+  </nav>
+  <a class="nav-wordmark" href="index.html">UNDER&nbsp;KLIPPEN</a>
+  <div class="nav-right">
+    <a class="btn-outline" href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" data-tone="dark" data-screen-label="01 Hero">
+  <div class="hero-left">
+    <div class="logo-badge">
+      <img class="brand-mark" src="assets/logo-white.png" alt="Under Klippen" />
+      <div class="est">Holstebro · Est. 1994</div>
+      <div class="stars">
+        <span class="dots">★ ★ ★</span>
+        <span>Den Danske Spiseguide</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right" data-parallax="0.18">
+    <div class="parallax-inner">
+      <img src="assets/exterior-hero.jpg" alt="Indgangen til Under Klippen om aftenen" />
+    </div>
+    <div class="hero-tagline">“Bogstaveligt talt under klippen — midt i Holstebro.”</div>
+  </div>
+</section>
+
+<!-- ============ SCROLL CUE ============ -->
+<div class="scroll-cue"><span class="arrow"></span></div>
+
+<!-- ============ INTRO ============ -->
+<section class="section-pad">
+  <div class="col-narrow intro">
+    <span class="eyebrow reveal">— Velkommen —</span>
+    <h1 class="display reveal" data-delay="1" style="margin-top: 24px;">
+      En aften, der begynder før du sætter dig.
+    </h1>
+    <p class="body-lg reveal" data-delay="2" style="margin-top: 28px;">
+      Under Klippen ligger gemt bag og under en stor klippe midt i Holstebro.
+      Indgangen trækker dig ind, før du finder bordet. Maden er seriøs.
+      Velkomsten er det ikke. Vi laver gastronomi, der vil noget — men vi gør det
+      uden stivhed og uden ceremoni.
+    </p>
+    <div class="stars-line reveal" data-delay="3">
+      <span class="dots">★ ★ ★</span>Tre stjerner i Den Danske Spiseguide. Vi er stolte.
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFO STRIP ============ -->
+<section>
+  <div class="info-strip">
+    <div class="info-col reveal">
+      <h3>Find os</h3>
+      <p>
+        Lille Østergade 3<br>
+        7500 Holstebro<br>
+        <em class="label">— bag klippen, ikke til at overse</em>
+      </p>
+      <p style="margin-top:14px;">
+        <a class="nav-link" href="https://www.google.com/maps/search/?api=1&query=Lille+%C3%98stergade+3+7500+Holstebro" target="_blank" rel="noopener" style="font-size: 11px;">Vis på kort</a>
+      </p>
+    </div>
+    <div class="info-col reveal" data-delay="1">
+      <span class="deco" aria-hidden="true"></span>
+      <h3>Kontakt</h3>
+      <p>
+        +45 97 40 66 55<br>
+        mail@underklippen.dk<br>
+        <em class="label">— vi svarer hurtigt</em>
+      </p>
+    </div>
+    <div class="info-col reveal" data-delay="2">
+      <h3>Åbningstider</h3>
+      <p>
+        Onsdag — lørdag<br>
+        12.00 — 24.00<br>
+        Søndag — tirsdag<br>
+        <em class="label">— åben efter aftale</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU TEASER ============ -->
+<section class="section-pad" style="background: var(--c-cream-warm);">
+  <div class="menu-teaser">
+    <span class="eyebrow reveal">— Vores menuer —</span>
+    <h2 class="display reveal" data-delay="1" style="margin-top:18px;">Fem måder at sætte sig ned på.</h2>
+    <p class="sub reveal" data-delay="2">tæt på årstiden, langt fra konvention</p>
+
+    <div class="menu-cards reveal" data-delay="3">
+      <a href="menu.html#3x3x3" class="menu-card">
+        <span class="mc-tag">Nyt koncept</span>
+        <span class="mc-num">I</span>
+        <h4>3 × 3 × 3</h4>
+        <p>3 retter og 3 snacks — vores nye, mere uformelle koncept.</p>
+        <div class="mc-foot">
+          <span class="mc-price">600 kr.</span>
+          <span class="mc-link">Se menuen <span class="arrow"></span></span>
+        </div>
+      </a>
+      <a href="menu.html#signatur" class="menu-card">
+        <span class="mc-num">II</span>
+        <h4>Signatur Menu</h4>
+        <p>3 retter og 3 lækre snacks. Vores klassiker.</p>
+        <div class="mc-foot">
+          <span class="mc-price">595 kr.</span>
+          <span class="mc-link">Se menuen <span class="arrow"></span></span>
+        </div>
+      </a>
+      <a href="menu.html#under-klippen" class="menu-card">
+        <span class="mc-num">III</span>
+        <h4>Menu Under Klippen</h4>
+        <p>Eksklusiv 5-retters menu og tre fortryllende snacks.</p>
+        <div class="mc-foot">
+          <span class="mc-price">795 kr.</span>
+          <span class="mc-link">Se menuen <span class="arrow"></span></span>
+        </div>
+      </a>
+      <a href="menu.html#taffel" class="menu-card">
+        <span class="mc-num">IV</span>
+        <h4>Taffel Under Klippen</h4>
+        <p>7 retter og 3 lækre snacks. For den lange aften.</p>
+        <div class="mc-foot">
+          <span class="mc-price">995 kr.</span>
+          <span class="mc-link">Se menuen <span class="arrow"></span></span>
+        </div>
+      </a>
+      <a href="menu.html#teater" class="menu-card">
+        <span class="mc-tag">17:30 — 18:00</span>
+        <span class="mc-num">V</span>
+        <h4>Teatermenu</h4>
+        <p>3 retter og 3 snacks. Kun på forestillingsdage v. Musikteatret.</p>
+        <div class="mc-foot">
+          <span class="mc-price">595 kr.</span>
+          <span class="mc-link">Se menuen <span class="arrow"></span></span>
+        </div>
+      </a>
+    </div>
+
+    <p class="reveal" style="margin-top: 64px; font-family: var(--f-display); font-style: italic; font-size: 20px; color: var(--c-ink-soft);">
+      “Vi bager vores eget brød. Hver dag.”
+    </p>
+
+    <div class="reveal" style="margin-top: 40px;">
+      <a href="menu.html" class="btn-ghost">
+        Se mere om menuerne <span class="arrow"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMAGE PAIR 1 ============ -->
+<section class="reveal" style="padding: 80px 0;">
+  <div class="pair offset-left">
+    <div class="pair-frame"><img src="assets/mad3.jpg" alt="Lammefilet med kaviar" /></div>
+    <div class="pair-frame"><img src="assets/mad1.jpg" alt="Krabbe og laksrogn" /></div>
+  </div>
+</section>
+
+<!-- ============ ASYMMETRIC EDITORIAL ============ -->
+<section class="section-pad" style="padding-top: 40px;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+    <div class="reveal">
+      <span class="eyebrow">— Råvarerne —</span>
+      <h2 class="display" style="font-size: clamp(36px, 4.4vw, 56px); margin: 18px 0 28px;">
+        <em style="font-style:italic; color: var(--c-accent);">Dagsfriske</em>
+        fisk fra Vesterhavet. Krogmodnet oksekød. Det er det.
+      </h2>
+      <p class="body-lg" style="color: var(--c-ink-soft); margin: 0;">
+        Vi køber fra fiskere vi har ringet til siden vi åbnede. Kødet hænger på
+        krog, til det er klar — ikke længere, ikke kortere. Grønt fra
+        Vestjylland, når jorden vil det. Det er ikke et koncept. Det er bare
+        sådan, vi laver mad.
+      </p>
+    </div>
+    <div class="reveal" data-delay="1">
+      <div class="pair-frame" style="aspect-ratio: 4/5; overflow: hidden;">
+        <img src="assets/madogvin.jpg" alt="Mad og vin på bordet" style="width:100%; height:100%; object-fit: cover;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMAGE PAIR 2 ============ -->
+<section class="reveal" style="padding: 60px 0;">
+  <div class="pair offset-right">
+    <div class="pair-frame"><img src="assets/champagne.jpg" alt="Champagne hældes op" /></div>
+    <div class="pair-frame"><img src="assets/mad2.jpg" alt="Lammeryg" /></div>
+  </div>
+</section>
+
+<!-- ============ KLIPPEN ATMOSPHERIC ============ -->
+<section class="klippen" data-tone="dark" data-screen-label="02 Klippen">
+  <div class="klippen-img">
+    <img src="assets/klippen-new2.jpg" alt="Klippen ved indgangen" style="object-position: 55% center; transform: scale(1.05);" />
+  </div>
+  <div class="klippen-text reveal">
+    <span class="eyebrow">— Stedet —</span>
+    <h2 class="display">Bogstaveligt talt <em>under klippen.</em></h2>
+    <p>
+      Klippen er ikke bare et navn. Den står lige uden for døren — vand der
+      løber, sten der lyser om aftenen, en lille passage der trækker dig ind
+      mod restauranten. Når du går forbi den, forsvinder Holstebro lidt.
+      Det er meningen.
+    </p>
+    <p>
+      Indvendigt er det varmt, lavt loft, blødt lys. Stenen følger dig
+      ind. Glasset møder den. Vi har talt om at flytte. Vi gør det aldrig.
+    </p>
+    <div style="margin-top: 24px;">
+      <a href="om-os.html" class="btn-ghost" style="color: var(--c-accent);">
+        Læs mere om huset <span class="arrow"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="events" class="events">
+  <div class="events-head reveal">
+    <span class="eyebrow">— Kommende aftener —</span>
+    <h2 class="display">Events &amp; aftener</h2>
+  </div>
+
+  <div class="events-grid">
+    <article class="event-card reveal">
+      <div class="month">Maj</div>
+      <div class="date">10<em>.</em></div>
+      <h3>Mors dag</h3>
+      <p>Fem serveringer, en flûte champagne ved ankomst, og en lille gave fra køkkenet til mor. Frokost fra kl. 12, aften fra kl. 17.30.</p>
+      <div class="meta">695 KR · PR. PERSON</div>
+      <a href="https://underklippen.dk/events/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE5NTYiLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D" target="_blank" rel="noopener" class="mc-link" style="margin-top:8px;">Se menu <span class="arrow"></span></a>
+    </article>
+    <article class="event-card reveal" data-delay="1">
+      <div class="month">Maj</div>
+      <div class="date">22<em>.</em></div>
+      <h3>Aspargesaften</h3>
+      <p>En aften om hvide og grønne asparges fra Samsø. Seks serveringer, vinmenu valgt til. Begrænsede pladser.</p>
+      <div class="meta">895 KR · M. VIN +495</div>
+    </article>
+    <article class="event-card reveal" data-delay="2">
+      <div class="month">Juni</div>
+      <div class="date">26<em>.</em></div>
+      <h3>Sommeraften</h3>
+      <p>Lange borde, åbent køkken, nyt fra havet og marken. Otte serveringer, musik når solen går ned bag klippen. Vores favoritaften.</p>
+      <div class="meta">1.195 KR · M. VIN +695</div>
+    </article>
+  </div>
+
+  <div class="reveal" style="text-align:center; margin-top: 64px;">
+    <a class="btn-ghost" href="#">Alle kommende aftener <span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- ============ GAVEKORT ============ -->
+<section id="gavekort" class="gavekort" data-tone="dark" data-screen-label="03 Gavekort">
+  <div class="reveal">
+    <span class="eyebrow">— Gavekort —</span>
+    <h2 class="display">
+      En aften <em style="font-style:italic; color: var(--c-accent);">under klippen</em>
+      er en god gave.
+    </h2>
+    <p>
+      Til en, du holder af. Til en, der har fortjent det. Til en runde
+      fødselsdag, en ny start, eller bare fordi det er en tirsdag. Vores
+      gavekort kan bruges til mad, vin og alt derimellem.
+    </p>
+    <a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener" class="btn-solid">Køb gavekort</a>
+    <span class="small">Udstedes via Superb Experience · sendes på mail</span>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-tone="dark">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-white.png" alt="Under Klippen" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
+      <p style="font-size: 14px; max-width: 360px; opacity: 0.85; font-weight: 300; line-height: 1.7;">
+        Lille Østergade 3, 7500 Holstebro.<br>
+        Casual fine dining bag klippen.<br>
+        Tre stjerner i Den Danske Spiseguide.
+      </p>
+    </div>
+    <div>
+      <h4>Restaurant</h4>
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="menu.html#vin">Vinkort</a></li>
+        <li><a href="om-os.html">Om os</a></li>
+        <li><a href="selskaber.html">Selskaber</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Praktisk</h4>
+      <ul>
+        <li><a href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
+        <li><a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener">Gavekort</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Følg med</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/underklippen/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/underklippen" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="#">Nyhedsbrev</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Restaurant Under Klippen</span>
+    <span>Lille Østergade 3 · 7500 Holstebro · +45 97 40 66 55</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="tweaks.js"></script>
+</body>
+</html>

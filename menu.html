@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu &amp; Vinkort — Under Klippen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="extras.css">
+  <style>
+    /* Page header */
+    .page-hero {
+      padding: calc(var(--nav-h) + 80px) 24px 80px;
+      text-align: center;
+      background: var(--c-cream);
+    }
+    .page-hero .eyebrow { display: inline-block; margin-bottom: 18px; }
+    .page-hero h1 {
+      font-size: clamp(56px, 8vw, 120px);
+      margin: 0 0 12px;
+      letter-spacing: -0.005em;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--c-accent); font-weight: 300; }
+    .page-hero .lede {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-ink-soft);
+      max-width: 560px;
+      margin: 8px auto 0;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-top: 1px solid var(--c-rule);
+      border-bottom: 1px solid var(--c-rule);
+      max-width: 920px;
+      margin: 64px auto 0;
+    }
+    .tab {
+      flex: 1;
+      padding: 28px 12px;
+      text-align: center;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      font-family: var(--f-body);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+      position: relative;
+      transition: color var(--t-fast);
+    }
+    .tab + .tab { border-left: 1px solid var(--c-rule); }
+    .tab .num {
+      display: block;
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--c-accent);
+      margin-bottom: 8px;
+    }
+    .tab.is-active { color: var(--c-ink); }
+    .tab::after {
+      content: "";
+      position: absolute;
+      left: 50%; bottom: -1px;
+      width: 0; height: 2px;
+      background: var(--c-accent);
+      transform: translateX(-50%);
+      transition: width var(--t-fast);
+    }
+    .tab.is-active::after { width: 60%; }
+
+    .tab-panels { padding: 80px 24px 140px; }
+    .tab-panel { display: none; max-width: 760px; margin: 0 auto; }
+    .tab-panel.is-active { display: block; animation: fadeUp 0.7s var(--ease); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    /* Menu sections */
+    .menu-section { margin-bottom: 80px; }
+    .menu-section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .menu-section .ms-sub {
+      text-align: center;
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--c-accent);
+      margin-bottom: 48px;
+    }
+
+    .dish {
+      padding: 26px 0;
+      border-bottom: 1px solid var(--c-rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+    }
+    .dish:first-child { border-top: 1px solid var(--c-rule); }
+    .dish h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 22px;
+      margin: 0 0 6px;
+    }
+    .dish p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--c-ink-soft);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .dish .price {
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--c-ink);
+      white-space: nowrap;
+    }
+
+    .menus-cta {
+      text-align: center;
+      margin-top: 64px;
+      padding: 48px;
+      background: var(--c-cream-warm);
+    }
+    .menus-cta h3 {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 32px;
+      margin: 0 0 12px;
+    }
+    .menus-cta p { margin: 0 0 28px; color: var(--c-ink-soft); font-weight: 300; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--c-rule);
+      margin-bottom: 64px;
+    }
+    .menu-grid > div {
+      padding: 40px;
+      border-right: 1px solid var(--c-rule);
+    }
+    .menu-grid > div:last-child { border-right: none; }
+    .menu-grid h3 {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 36px;
+      margin: 0 0 8px;
+    }
+    .menu-grid h3 em { font-style: italic; color: var(--c-accent); }
+    .menu-grid .courses-count {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: 20px;
+    }
+    .menu-grid p { font-size: 14px; line-height: 1.7; color: var(--c-ink-soft); font-weight: 300; }
+    .menu-grid .price-line {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--c-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--f-display);
+      font-size: 18px;
+    }
+    .menu-grid .price-line span:first-child { font-style: italic; color: var(--c-ink-soft); font-size: 14px; }
+    @media (max-width: 720px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-grid > div { border-right: none; border-bottom: 1px solid var(--c-rule); }
+      .menu-grid > div:last-child { border-bottom: none; }
+    }
+
+    /* Wine */
+    .wine-region {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 56px;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--c-rule);
+      align-items: start;
+    }
+    .wine-region:first-child { border-top: 1px solid var(--c-rule); }
+    .wine-region .region {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 36px;
+      line-height: 1;
+    }
+    .wine-region .region-sub {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--c-accent);
+      margin-top: 6px;
+    }
+    .wine {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      padding: 14px 0;
+      align-items: baseline;
+    }
+    .wine + .wine { border-top: 1px dashed var(--c-rule); }
+    .wine h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 17px;
+      margin: 0 0 4px;
+    }
+    .wine .producer { font-size: 12px; color: var(--c-accent); letter-spacing: 0.05em; font-weight: 400; }
+    .wine .meta { font-size: 12px; color: var(--c-ink-soft); font-weight: 300; }
+    .wine .price-pair {
+      font-family: var(--f-display);
+      font-size: 17px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .wine .price-pair em {
+      display: block;
+      font-style: italic;
+      font-size: 11px;
+      color: var(--c-ink-soft);
+      letter-spacing: 0.1em;
+    }
+    @media (max-width: 720px) {
+      .wine-region { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    /* Tasting note quote */
+    .quote-block {
+      max-width: 720px;
+      margin: 96px auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .quote-block p {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 32px;
+      line-height: 1.4;
+      color: var(--c-ink);
+      margin: 0 0 24px;
+    }
+    .quote-block cite {
+      font-family: var(--f-body);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      font-style: normal;
+    }
+
+    .pairing-strip {
+      background: var(--c-mid);
+      color: var(--c-light-text);
+      padding: 96px 24px;
+      text-align: center;
+    }
+    .pairing-strip h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+    .pairing-strip p {
+      max-width: 540px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+      opacity: 0.92;
+    }
+    .pairing-strip h2 em { font-style: italic; color: var(--c-accent); }
+
+    /* Set menus (5 real menus) */
+    .set-menus {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid var(--c-rule);
+      border-left: 1px solid var(--c-rule);
+    }
+    .set-menu {
+      padding: 48px 40px 40px;
+      border-right: 1px solid var(--c-rule);
+      border-bottom: 1px solid var(--c-rule);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: transparent;
+      transition: background 0.3s ease;
+      position: relative;
+    }
+    .set-menu:hover { background: var(--c-cream); }
+    .set-menu.featured {
+      background: var(--c-cream-warm);
+    }
+    .set-menu.featured:hover { background: var(--c-cream); }
+    .set-menu .sm-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+      min-height: 32px;
+    }
+    .set-menu .sm-tag {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      border: 1px solid var(--c-accent);
+      padding: 5px 10px;
+      font-weight: 500;
+    }
+    .set-menu .sm-num {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-accent);
+      letter-spacing: 0.04em;
+      margin-left: auto;
+    }
+    .set-menu h3 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: clamp(28px, 3vw, 36px);
+      letter-spacing: 0.005em;
+      line-height: 1.15;
+      margin: 0;
+      color: var(--c-ink);
+    }
+    .set-menu .sm-format {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+    }
+    .set-menu p {
+      font-size: 15px;
+      color: var(--c-ink);
+      font-weight: 300;
+      line-height: 1.75;
+      margin: 6px 0 0;
+      flex: 1;
+    }
+    .set-menu .sm-foot {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 18px;
+      border-top: 1px solid var(--c-rule);
+    }
+    .set-menu .sm-price {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 28px;
+      color: var(--c-ink);
+    }
+    .set-menu .sm-pp {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-ink-soft);
+    }
+    @media (max-width: 720px) {
+      .set-menus { grid-template-columns: 1fr; }
+    }
+
+    /* Drikke / pairing section */
+    .drikke-section {
+      max-width: 1100px;
+      margin: 140px auto 0;
+      padding: 0 24px;
+    }
+    .drikke-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+    .drikke-head h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      margin: 14px 0 28px;
+    }
+    .drikke-head h2 em { font-style: italic; color: var(--c-accent); }
+    .drikke-head p {
+      font-size: 16px;
+      color: var(--c-ink-soft);
+      font-weight: 300;
+      line-height: 1.85;
+      margin: 0;
+    }
+    .pairing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--c-rule);
+      border-left: 1px solid var(--c-rule);
+    }
+    .pairing-card {
+      padding: 36px 32px;
+      border-right: 1px solid var(--c-rule);
+      border-bottom: 1px solid var(--c-rule);
+      background: var(--c-cream);
+    }
+    .pairing-card.featured {
+      background: var(--c-dark);
+      color: var(--c-light-text);
+    }
+    .pairing-card h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: 0.005em;
+      margin: 0 0 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--c-rule);
+    }
+    .pairing-card.featured h4 {
+      border-bottom-color: rgba(232,222,205,0.2);
+      color: var(--c-light-text);
+    }
+    .pairing-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 0;
+    }
+    .pairing-row:not(.alt) { border-bottom: 1px dashed var(--c-rule); }
+    .pairing-card.featured .pairing-row:not(.alt) { border-bottom-color: rgba(232,222,205,0.15); }
+    .pairing-row span:first-child {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--c-ink);
+      font-weight: 300;
+    }
+    .pairing-card.featured .pairing-row span:first-child {
+      color: var(--c-light-text);
+      opacity: 0.85;
+    }
+    .pairing-row .p-price {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-ink);
+      white-space: nowrap;
+    }
+    .pairing-card.featured .pairing-row .p-price {
+      color: var(--c-accent);
+    }
+    .pairing-row.alt span:first-child {
+      color: var(--c-ink-soft);
+      font-style: italic;
+    }
+    .pairing-card.featured .pairing-row.alt span:first-child {
+      color: var(--c-light-text);
+      opacity: 0.65;
+    }
+    @media (max-width: 880px) {
+      .pairing-cards { grid-template-columns: 1fr; }
+    }
+
+    /* Vinkort hero */
+    .vinkort-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 24px;
+    }
+    .vinkort-text .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+    }
+    .vinkort-text h2 {
+      font-size: clamp(40px, 4.5vw, 60px);
+      line-height: 1.05;
+    }
+    .vinkort-text h2 em { font-style: italic; color: var(--c-accent); }
+    .vinkort-text p {
+      font-size: 16px;
+      color: var(--c-ink-soft);
+      line-height: 1.85;
+      font-weight: 300;
+      margin: 0 0 18px;
+      max-width: 480px;
+    }
+    .vinkort-photo {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -30px rgba(45, 35, 25, 0.35);
+    }
+    .vinkort-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 880px) {
+      .vinkort-hero { grid-template-columns: 1fr; gap: 48px; }
+      .vinkort-photo { aspect-ratio: 4/3; }
+    }
+
+    /* Vin philosophy 3-col */
+    .vin-philosophy {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      border-top: 1px solid var(--c-rule);
+    }
+    .vp-col {
+      padding: 48px 32px 32px;
+      border-right: 1px solid var(--c-rule);
+    }
+    .vp-col:last-child { border-right: none; }
+    .vp-num {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 36px;
+      color: var(--c-accent);
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .vp-col h4 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 24px;
+      letter-spacing: 0.005em;
+      margin: 0 0 14px;
+      color: var(--c-ink);
+    }
+    .vp-col p {
+      font-size: 14px;
+      color: var(--c-ink-soft);
+      line-height: 1.75;
+      font-weight: 300;
+      margin: 0;
+    }
+    @media (max-width: 880px) {
+      .vin-philosophy { grid-template-columns: 1fr; }
+      .vp-col { border-right: none; border-bottom: 1px solid var(--c-rule); }
+      .vp-col:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <button class="nav-burger" aria-label="Menu"><span></span><span></span></button>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Forside</a>
+    <a class="nav-link is-active" href="menu.html">Menu &amp; Vinkort</a>
+    <a class="nav-link" href="om-os.html">Om os</a>
+    <a class="nav-link" href="selskaber.html">Selskaber</a>
+    <a class="nav-link" href="kontakt.html">Kontakt</a>
+    <a class="nav-link" href="index.html#events">Events ↓</a>
+    <a class="nav-link" href="index.html#gavekort">Gavekort ↓</a>
+  </nav>
+  <a class="nav-wordmark" href="index.html">UNDER&nbsp;KLIPPEN</a>
+  <div class="nav-right">
+    <a class="btn-outline" href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="page-hero" data-screen-label="01 Hero">
+  <span class="eyebrow reveal">— Spisekortet —</span>
+  <h1 class="display reveal" data-delay="1">
+    Menu <em>&amp;</em> Vinkort
+  </h1>
+  <p class="lede reveal" data-delay="2">
+    Vi skifter kort efter årstid og dagens fangst. Det her er ugen, du sidder ned.
+  </p>
+</section>
+
+<!-- ============ TABS ============ -->
+<div class="tabs">
+  <button class="tab is-active" data-target="menu">
+    <span class="num">i.</span>
+    Menu
+  </button>
+  <button class="tab" data-target="vin">
+    <span class="num">ii.</span>
+    Vinkort
+  </button>
+</div>
+
+<!-- ============ PANELS ============ -->
+<div class="tab-panels">
+
+  <!-- ---------- MENU PANEL ---------- -->
+  <div class="tab-panel is-active" id="panel-menu">
+
+    <!-- Five set menus -->
+    <div class="set-menus reveal">
+
+      <article id="3x3x3" class="set-menu">
+        <div class="sm-head">
+          <span class="sm-tag">Nyt koncept</span>
+          <span class="sm-num">I.</span>
+        </div>
+        <h3>3 × 3 × 3</h3>
+        <div class="sm-format">3 retter · 3 snacks</div>
+        <p>Et nyt, mere uformelt koncept. Tre snacks fra køkkenet, tre retter til at sidde med. Til den lette aften, eller til at begynde et bekendtskab med huset.</p>
+        <div class="sm-foot">
+          <span class="sm-price">600 kr.</span>
+          <span class="sm-pp">pr. person</span>
+        </div>
+        <a href="http://underklippen.dk/wp-content/uploads/2026/05/3-3.pdf" target="_blank" rel="noopener" class="mc-link" style="margin-top:16px; display:inline-flex;">Se menuen (PDF) <span class="arrow"></span></a>
+      </article>
+
+      <article id="signatur" class="set-menu">
+        <div class="sm-head">
+          <span class="sm-num">II.</span>
+        </div>
+        <h3>Signatur Menu</h3>
+        <div class="sm-format">3 retter · 3 snacks</div>
+        <p>Vores klassiker. Oplev vores unikke Signatur Menu bestående af 3 retter og 3 lækre snacks fra køkkenet. Tæt på årstiden, langt fra konvention.</p>
+        <div class="sm-foot">
+          <span class="sm-price">595 kr.</span>
+          <span class="sm-pp">pr. person</span>
+        </div>
+        <a href="http://underklippen.dk/wp-content/uploads/2026/05/Signatur.pdf" target="_blank" rel="noopener" class="mc-link" style="margin-top:16px; display:inline-flex;">Se menuen (PDF) <span class="arrow"></span></a>
+      </article>
+
+      <article id="under-klippen" class="set-menu featured">
+        <div class="sm-head">
+          <span class="sm-tag">Husets menu</span>
+          <span class="sm-num">III.</span>
+        </div>
+        <h3>Menu Under Klippen</h3>
+        <div class="sm-format">5 retter · 3 snacks</div>
+        <p>Vores eksklusive 5-retters menu, ledsaget af tre fortryllende snacks der vil forføre dine smagsløg. Den fulde aften, sådan som vi helst vil servere den.</p>
+        <div class="sm-foot">
+          <span class="sm-price">795 kr.</span>
+          <span class="sm-pp">pr. person</span>
+        </div>
+        <a href="http://underklippen.dk/wp-content/uploads/2026/05/menu-underklippen.pdf" target="_blank" rel="noopener" class="mc-link" style="margin-top:16px; display:inline-flex;">Se menuen (PDF) <span class="arrow"></span></a>
+      </article>
+
+      <article id="taffel" class="set-menu">
+        <div class="sm-head">
+          <span class="sm-num">IV.</span>
+        </div>
+        <h3>Taffel Under Klippen</h3>
+        <div class="sm-format">7 retter · 3 snacks</div>
+        <p>Vores unikke Taffel Under Klippen menu bestående af 7 retter og 3 lækre snacks. For dem der har tid, og for aftener der skal vare.</p>
+        <div class="sm-foot">
+          <span class="sm-price">995 kr.</span>
+          <span class="sm-pp">pr. person</span>
+        </div>
+        <a href="http://underklippen.dk/wp-content/uploads/2026/05/taffel.pdf" target="_blank" rel="noopener" class="mc-link" style="margin-top:16px; display:inline-flex;">Se menuen (PDF) <span class="arrow"></span></a>
+      </article>
+
+      <article id="teater" class="set-menu">
+        <div class="sm-head">
+          <span class="sm-tag">17:30 — 18:00</span>
+          <span class="sm-num">V.</span>
+        </div>
+        <h3>Teatermenu</h3>
+        <div class="sm-format">3 retter · 3 snacks</div>
+        <p>Ved arrangementer i Musikteatret Holstebro: en særlig teatermenu, kun tilgængelig mellem kl. 17:30 og 18:00 på forestillingsdage. 3 retter og 3 snacks, så du kan nå det hele.</p>
+        <div class="sm-foot">
+          <span class="sm-price">595 kr.</span>
+          <span class="sm-pp">pr. person</span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="reveal" style="text-align:center; font-size:13px; color: var(--c-ink-soft); font-weight:300; margin: 64px auto 0; max-width: 560px;">
+      Allergier eller ønsker om vegetarisk? Vi kan det hele — bare skriv det ved booking.<br>
+      Drikke og vinmenuer ses længere nede.
+    </p>
+
+    <div class="quote-block reveal" style="margin-top: 96px;">
+      <p>“Vi bager vores eget brød. Hver dag. Det er ikke for at gøre os til — det smager bare bedre, når det stadig er varmt.”</p>
+      <cite>— Køkkenet</cite>
+    </div>
+
+    <!-- DRIKKE / PAIRING SECTION -->
+    <section id="drikke" class="drikke-section reveal">
+      <div class="drikke-head">
+        <span class="eyebrow">— Drikke —</span>
+        <h2 class="display">Champagne &amp; <em>vinmenu</em></h2>
+        <p>
+          Vores lille vinkort er nøje sammensat med fokus på kvalitet til
+          fornuftige priser. Vi dedikerer tid til at opspore, smage og udvælge
+          vine fra entusiastiske, kvalitetsbevidste og innovative vinbønder.
+          Hver vin er omhyggeligt udvalgt for at levere stor smag og
+          harmonisere perfekt med vores gæsters valg af mad.
+        </p>
+      </div>
+
+      <div class="pairing-cards">
+        <div class="pairing-card">
+          <h4>Signatur Menu</h4>
+          <div class="pairing-row">
+            <span>Inkl. vinmenu</span>
+            <span class="p-price">1.145 kr.</span>
+          </div>
+          <div class="pairing-row alt">
+            <span>Inkl. mocktails &amp; non-alkohol menu</span>
+            <span class="p-price">1.095 kr.</span>
+          </div>
+        </div>
+
+        <div class="pairing-card featured">
+          <h4>Menu Under Klippen</h4>
+          <div class="pairing-row">
+            <span>Inkl. vinmenu</span>
+            <span class="p-price">1.545 kr.</span>
+          </div>
+          <div class="pairing-row alt">
+            <span>Non-alkohol menu</span>
+            <span class="p-price">1.445 kr.</span>
+          </div>
+        </div>
+
+        <div class="pairing-card">
+          <h4>Taffel Under Klippen</h4>
+          <div class="pairing-row">
+            <span>Inkl. vinmenu, mineralvand, kaffe, avec &amp; petit fours</span>
+            <span class="p-price">1.995 kr.</span>
+          </div>
+          <div class="pairing-row alt">
+            <span>Inkl. non-alkohol menu, kaffe &amp; petit fours</span>
+            <span class="p-price">1.845 kr.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top: 64px;">
+        <a href="http://underklippen.dk/wp-content/uploads/2026/03/Under-klippens-Vinkort-2026-pdf.pdf" target="_blank" rel="noopener" class="btn-ghost">
+          Se hele vinkortet (PDF) <span class="arrow"></span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ---------- WINE PANEL ---------- -->
+  <div class="tab-panel" id="panel-vin">
+
+    <div class="vinkort-hero reveal">
+      <div class="vinkort-text">
+        <span class="eyebrow">— Vinkortet 2026 —</span>
+        <h2 class="display" style="margin: 18px 0 24px;">
+          Et vinkort der <em>lytter</em> til maden.
+        </h2>
+        <p>
+          Vores vinkort er tænkt sammen med menuen — fra åbningsglasset til den
+          sidste sluk. Klassiske huse fra Bourgogne, Champagne og Loire side om side
+          med naturvine vi har lyst til at fortælle om.
+        </p>
+        <p>
+          Vil du have det hele lige nu, ligger den fulde liste her som PDF.
+          Vil du hellere snakke os igennem den? Det kan vi også.
+        </p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top: 12px;">
+          <a href="http://underklippen.dk/wp-content/uploads/2026/03/Under-klippens-Vinkort-2026-pdf.pdf" target="_blank" rel="noopener" class="btn-solid">
+            Se hele vinkortet (PDF) <span class="arrow"></span>
+          </a>
+          <a href="om-os.html#kontakt" class="btn-ghost">
+            Spørg os <span class="arrow"></span>
+          </a>
+        </div>
+      </div>
+      <div class="vinkort-photo">
+        <img src="assets/vin1.jpg" alt="Vinkort hos Under Klippen" />
+      </div>
+    </div>
+
+    <div class="vin-philosophy reveal">
+      <div class="vp-col">
+        <span class="vp-num">01</span>
+        <h4>Klassisk grundvold</h4>
+        <p>Pol Roger, Hubert Lamy, Bernard Baudry — huse vi vender tilbage til, fordi vi ved hvad vi får.</p>
+      </div>
+      <div class="vp-col">
+        <span class="vp-num">02</span>
+        <h4>Plads til naturen</h4>
+        <p>Macererede hvide, ufiltrerede bobler, ukendte navne fra kendte regioner — for de nysgerrige.</p>
+      </div>
+      <div class="vp-col">
+        <span class="vp-num">03</span>
+        <h4>Glas eller flaske</h4>
+        <p>Næsten alt kan fås på glas. Vi serverer hellere et velvalgt glas end en stor flaske du ikke får drukket.</p>
+      </div>
+    </div>
+
+    <div class="quote-block reveal" style="margin-top: 80px;">
+      <p>"En god vin gør ikke maden bedre. Den lytter til den."</p>
+      <cite>— Vinkortet</cite>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-tone="dark">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/logo-white.png" alt="Under Klippen" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
+      <p style="font-size: 14px; max-width: 360px; opacity: 0.85; font-weight: 300; line-height: 1.7;">
+        Lille Østergade 3, 7500 Holstebro.<br>
+        Casual fine dining bag klippen.<br>
+        Tre stjerner i Den Danske Spiseguide.
+      </p>
+    </div>
+    <div>
+      <h4>Restaurant</h4>
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="menu.html#vin">Vinkort</a></li>
+        <li><a href="om-os.html">Om os</a></li>
+        <li><a href="selskaber.html">Selskaber</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Praktisk</h4>
+      <ul>
+        <li><a href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
+        <li><a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener">Gavekort</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Følg med</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/underklippen/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/underklippen" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="#">Nyhedsbrev</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 Restaurant Under Klippen</span>
+    <span>Lille Østergade 3 · 7500 Holstebro · +45 97 40 66 55</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      const target = t.dataset.target;
+      document.querySelectorAll('.tab').forEach(x => x.classList.toggle('is-active', x === t));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('is-active', p.id === 'panel-' + target));
+      // Re-trigger reveal observation on the now-visible panel
+      document.querySelectorAll('#panel-' + target + ' .reveal').forEach(el => {
+        el.classList.remove('is-in');
+        requestAnimationFrame(() => el.classList.add('is-in'));
+      });
+    });
+  });
+  // Hash deep-link
+  if (location.hash === '#vin') {
+    document.querySelector('.tab[data-target="vin"]').click();
+  }
+</script>
+<script src="tweaks.js"></script>
+</body>
+</html>
