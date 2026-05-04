@@ -14,11 +14,10 @@
     /* ===== Page-specific (Forside) ===== */
 
     /* HERO -------------------------------------------------- */
+    /* Mobile-first: single column default */
     .hero {
       display: grid;
-      grid-template-columns: 40fr 60fr;
-      height: 100vh;
-      min-height: 720px;
+      grid-template-columns: 1fr;
       width: 100%;
     }
     .hero-left {
@@ -27,6 +26,7 @@
       place-items: center;
       position: relative;
       overflow: hidden;
+      padding: calc(var(--nav-h, 72px) + 48px) 32px 56px;
     }
     .hero-left::before {
       content: "";
@@ -50,6 +50,7 @@
     .hero-right {
       position: relative;
       overflow: hidden;
+      aspect-ratio: 4/3;
     }
     .hero-right .parallax-inner {
       position: absolute;
@@ -64,30 +65,44 @@
     .hero-right::after {
       content: "";
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(26,18,8,0.18), transparent 30%, transparent 70%, rgba(26,18,8,0.32));
+      background: linear-gradient(180deg, rgba(26,18,8,0.18), transparent 30%, transparent 70%, rgba(26,18,8,0.42));
       pointer-events: none;
     }
 
     .hero-tagline {
       position: absolute;
-      bottom: 40px; left: 40px;
+      bottom: 28px; left: 28px; right: 28px;
       color: var(--c-light-text);
       font-family: var(--f-display);
       font-style: italic;
       font-weight: 300;
-      font-size: 22px;
+      font-size: 19px;
+      line-height: 1.45;
       letter-spacing: 0.01em;
       text-shadow: 0 2px 24px rgba(0,0,0,0.6);
       opacity: 0;
       animation: heroIn 1.2s var(--ease) 0.9s forwards;
-      max-width: 460px;
+      max-width: 100%;
     }
 
-    @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; height: auto; min-height: 0; }
-      .hero-left { padding: 100px 24px 80px; }
-      .hero-right { aspect-ratio: 4/5; }
-      .hero-tagline { font-size: 18px; left: 24px; bottom: 24px; }
+    /* Desktop: side-by-side */
+    @media (min-width: 881px) {
+      .hero {
+        grid-template-columns: 40fr 60fr;
+        height: 100vh;
+        min-height: 720px;
+      }
+      .hero-left {
+        padding: 0;
+      }
+      .hero-right {
+        aspect-ratio: unset;
+      }
+      .hero-tagline {
+        bottom: 40px; left: 40px; right: auto;
+        font-size: 22px;
+        max-width: 460px;
+      }
     }
 
     /* SCROLL CUE ------------------------------------------- */
