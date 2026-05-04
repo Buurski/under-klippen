@@ -25,7 +25,7 @@
     if (cue) cue.style.display = t.showScrollCue ? '' : 'none';
 
     const hero = document.querySelector('.hero');
-    if (hero) hero.style.gridTemplateColumns = `${t.heroSplit}fr ${100 - t.heroSplit}fr`;
+    if (hero && window.innerWidth > 880) hero.style.gridTemplateColumns = `${t.heroSplit}fr ${100 - t.heroSplit}fr`;
   }
 
   function buildPanel() {
