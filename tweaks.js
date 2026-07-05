@@ -1,4 +1,4 @@
-/* Tweaks panel — Under Klippen */
+/* Tweaks panel — Restaurant Kornmark */
 (function () {
   'use strict';
 

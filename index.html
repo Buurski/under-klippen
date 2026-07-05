@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Under Klippen — Restaurant i Holstebro</title>
-  <meta name="description" content="Restaurant Under Klippen ligger bogstaveligt talt under en klippe midt i Holstebro. Casual fine dining, dagsfriske råvarer, tre stjerner i Den Danske Spiseguide." />
+  <title>Restaurant Kornmark — Restaurant i Holstebro</title>
+  <meta name="description" content="Restaurant Kornmark ligger der hvor Holstebro slipper og markerne tager over. Casual fine dining, dagsfriske vestjyske råvarer." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
@@ -362,8 +362,8 @@
     }
     .menu-card:hover .mc-link .arrow { width: 28px; }
 
-    /* KLIPPEN ATMOSPHERIC ---------------------------------- */
-    .klippen {
+    /* MARKEN ATMOSPHERIC ---------------------------------- */
+    .landsted {
       position: relative;
       min-height: 100vh;
       display: grid;
@@ -372,37 +372,37 @@
       color: var(--c-light-text);
       overflow: hidden;
     }
-    .klippen-img {
+    .landsted-img {
       position: relative;
       overflow: hidden;
     }
-    .klippen-img img {
+    .landsted-img img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
       filter: brightness(0.7) saturate(0.95);
     }
-    .klippen-img::after {
+    .landsted-img::after {
       content: "";
       position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent 60%, rgba(26,18,8,0.6));
     }
-    .klippen-text {
+    .landsted-text {
       padding: 120px 80px;
       display: grid;
       align-content: center;
       max-width: 640px;
     }
-    .klippen-text h2 {
+    .landsted-text h2 {
       font-size: clamp(40px, 5.4vw, 72px);
       margin: 24px 0 32px;
     }
-    .klippen-text h2 em {
+    .landsted-text h2 em {
       font-style: italic;
       color: var(--c-accent);
       font-weight: 300;
     }
-    .klippen-text p {
+    .landsted-text p {
       font-size: 17px;
       line-height: 1.8;
       font-weight: 300;
@@ -410,9 +410,9 @@
       margin: 0 0 24px;
     }
     @media (max-width: 880px) {
-      .klippen { grid-template-columns: 1fr; min-height: 0; }
-      .klippen-img { aspect-ratio: 5/4; }
-      .klippen-text { padding: 80px 28px; }
+      .landsted { grid-template-columns: 1fr; min-height: 0; }
+      .landsted-img { aspect-ratio: 5/4; }
+      .landsted-text { padding: 80px 28px; }
     }
 
     /* EVENTS ----------------------------------------------- */
@@ -583,9 +583,9 @@
     <a class="nav-link" href="#events">Events ↓</a>
     <a class="nav-link" href="#gavekort">Gavekort ↓</a>
   </nav>
-  <a class="nav-wordmark" href="index.html">UNDER&nbsp;KLIPPEN</a>
+  <a class="nav-wordmark" href="index.html">KORNMARK</a>
   <div class="nav-right">
-    <a class="btn-outline" href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a>
+    <a class="btn-outline" href="https://kornmark.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a>
   </div>
 </header>
 
@@ -593,19 +593,15 @@
 <section class="hero" data-tone="dark" data-screen-label="01 Hero">
   <div class="hero-left">
     <div class="logo-badge">
-      <img class="brand-mark" src="assets/logo-white.png" alt="Under Klippen" />
+      <img class="brand-mark" src="assets/logo-white.png" alt="Restaurant Kornmark" />
       <div class="est">Holstebro · Est. 1994</div>
-      <div class="stars">
-        <span class="dots">★ ★ ★</span>
-        <span>Den Danske Spiseguide</span>
-      </div>
     </div>
   </div>
   <div class="hero-right" data-parallax="0.18">
     <div class="parallax-inner">
-      <img src="assets/exterior-hero.jpg" alt="Indgangen til Under Klippen om aftenen" />
+      <img src="assets/exterior-hero.jpg" alt="Indgangen til Restaurant Kornmark om aftenen" />
     </div>
-    <div class="hero-tagline">“Bogstaveligt talt under klippen — midt i Holstebro.”</div>
+    <div class="hero-tagline">“Der hvor byen slipper og marken tager over — i Holstebro.”</div>
   </div>
 </section>
 
@@ -620,13 +616,13 @@
       En aften, der begynder før du sætter dig.
     </h1>
     <p class="body-lg reveal" data-delay="2" style="margin-top: 28px;">
-      Under Klippen ligger gemt bag og under en stor klippe midt i Holstebro.
-      Indgangen trækker dig ind, før du finder bordet. Maden er seriøs.
+      Kornmark ligger der hvor Holstebro slipper og de vestjyske marker tager
+      over. Vejen derud trækker dig ind, før du finder bordet. Maden er seriøs.
       Velkomsten er det ikke. Vi laver gastronomi, der vil noget — men vi gør det
       uden stivhed og uden ceremoni.
     </p>
     <div class="stars-line reveal" data-delay="3">
-      <span class="dots">★ ★ ★</span>Tre stjerner i Den Danske Spiseguide. Vi er stolte.
+      Vestjysk råvarekøkken, tæt på årstiden. Vi glæder os til at tage imod.
     </div>
   </div>
 </section>
@@ -637,20 +633,20 @@
     <div class="info-col reveal">
       <h3>Find os</h3>
       <p>
-        Lille Østergade 3<br>
+        Nørreport 155<br>
         7500 Holstebro<br>
-        <em class="label">— bag klippen, ikke til at overse</em>
+        <em class="label">— ved marken, hvor byen slipper</em>
       </p>
       <p style="margin-top:14px;">
-        <a class="nav-link" href="https://www.google.com/maps/search/?api=1&query=Lille+%C3%98stergade+3+7500+Holstebro" target="_blank" rel="noopener" style="font-size: 11px;">Vis på kort</a>
+        <a class="nav-link" href="https://www.google.com/maps/search/?api=1&query=N%C3%B8rreport+155+7500+Holstebro" target="_blank" rel="noopener" style="font-size: 11px;">Vis på kort</a>
       </p>
     </div>
     <div class="info-col reveal" data-delay="1">
       <span class="deco" aria-hidden="true"></span>
       <h3>Kontakt</h3>
       <p>
-        +45 97 40 66 55<br>
-        mail@underklippen.dk<br>
+        +45 12 34 56 78<br>
+        hej@kornmark.dk<br>
         <em class="label">— vi svarer hurtigt</em>
       </p>
     </div>
@@ -693,9 +689,9 @@
           <span class="mc-link">Se menuen <span class="arrow"></span></span>
         </div>
       </a>
-      <a href="menu.html#under-klippen" class="menu-card">
+      <a href="menu.html#kornmark" class="menu-card">
         <span class="mc-num">III</span>
-        <h4>Menu Under Klippen</h4>
+        <h4>Menu Kornmark</h4>
         <p>Eksklusiv 5-retters menu og tre fortryllende snacks.</p>
         <div class="mc-foot">
           <span class="mc-price">795 kr.</span>
@@ -704,7 +700,7 @@
       </a>
       <a href="menu.html#taffel" class="menu-card">
         <span class="mc-num">IV</span>
-        <h4>Taffel Under Klippen</h4>
+        <h4>Taffel Kornmark</h4>
         <p>7 retter og 3 lækre snacks. For den lange aften.</p>
         <div class="mc-foot">
           <span class="mc-price">995 kr.</span>
@@ -775,23 +771,23 @@
   </div>
 </section>
 
-<!-- ============ KLIPPEN ATMOSPHERIC ============ -->
-<section class="klippen" data-tone="dark" data-screen-label="02 Klippen">
-  <div class="klippen-img">
-    <img src="assets/klippen-new2.jpg" alt="Klippen ved indgangen" style="object-position: 55% center; transform: scale(1.05);" />
+<!-- ============ MARKEN ATMOSPHERIC ============ -->
+<section class="landsted" data-tone="dark" data-screen-label="02 Marken">
+  <div class="landsted-img">
+    <img src="assets/landskab-hero.jpg" alt="Markerne ved Kornmark" style="object-position: 55% center; transform: scale(1.05);" />
   </div>
-  <div class="klippen-text reveal">
+  <div class="landsted-text reveal">
     <span class="eyebrow">— Stedet —</span>
-    <h2 class="display">Bogstaveligt talt <em>under klippen.</em></h2>
+    <h2 class="display">Der hvor byen <em>slipper.</em></h2>
     <p>
-      Klippen er ikke bare et navn. Den står lige uden for døren — vand der
-      løber, sten der lyser om aftenen, en lille passage der trækker dig ind
-      mod restauranten. Når du går forbi den, forsvinder Holstebro lidt.
+      Marken er ikke bare et navn. Den begynder lige uden for døren — korn der
+      bølger, lærker om sommeren, en lav vestjysk himmel der trækker dig ud
+      mod horisonten. Når du kører herud, forsvinder Holstebro lidt.
       Det er meningen.
     </p>
     <p>
-      Indvendigt er det varmt, lavt loft, blødt lys. Stenen følger dig
-      ind. Glasset møder den. Vi har talt om at flytte. Vi gør det aldrig.
+      Indvendigt er det varmt, lavt loft, blødt lys. Landskabet følger dig
+      ind. Glasset møder det. Vi har talt om at flytte. Vi gør det aldrig.
     </p>
     <div style="margin-top: 24px;">
       <a href="om-os.html" class="btn-ghost" style="color: var(--c-accent);">
@@ -815,7 +811,7 @@
       <h3>Mors dag</h3>
       <p>Fem serveringer, en flûte champagne ved ankomst, og en lille gave fra køkkenet til mor. Frokost fra kl. 12, aften fra kl. 17.30.</p>
       <div class="meta">695 KR · PR. PERSON</div>
-      <a href="https://underklippen.dk/events/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE5NTYiLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D" target="_blank" rel="noopener" class="mc-link" style="margin-top:8px;">Se menu <span class="arrow"></span></a>
+      <a href="https://kornmark.dk/events/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjE5NTYiLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D" target="_blank" rel="noopener" class="mc-link" style="margin-top:8px;">Se menu <span class="arrow"></span></a>
     </article>
     <article class="event-card reveal" data-delay="1">
       <div class="month">Maj</div>
@@ -828,7 +824,7 @@
       <div class="month">Juni</div>
       <div class="date">26<em>.</em></div>
       <h3>Sommeraften</h3>
-      <p>Lange borde, åbent køkken, nyt fra havet og marken. Otte serveringer, musik når solen går ned bag klippen. Vores favoritaften.</p>
+      <p>Lange borde, åbent køkken, nyt fra havet og marken. Otte serveringer, musik når solen går ned over marken. Vores favoritaften.</p>
       <div class="meta">1.195 KR · M. VIN +695</div>
     </article>
   </div>
@@ -843,7 +839,7 @@
   <div class="reveal">
     <span class="eyebrow">— Gavekort —</span>
     <h2 class="display">
-      En aften <em style="font-style:italic; color: var(--c-accent);">under klippen</em>
+      En aften <em style="font-style:italic; color: var(--c-accent);">ved Kornmark</em>
       er en god gave.
     </h2>
     <p>
@@ -851,7 +847,7 @@
       fødselsdag, en ny start, eller bare fordi det er en tirsdag. Vores
       gavekort kan bruges til mad, vin og alt derimellem.
     </p>
-    <a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener" class="btn-solid">Køb gavekort</a>
+    <a href="https://giftcard.superbexperience.com/kornmark" target="_blank" rel="noopener" class="btn-solid">Køb gavekort</a>
     <span class="small">Udstedes via Superb Experience · sendes på mail</span>
   </div>
 </section>
@@ -860,11 +856,11 @@
 <footer class="footer" data-tone="dark">
   <div class="footer-grid">
     <div>
-      <img src="assets/logo-white.png" alt="Under Klippen" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
+      <img src="assets/logo-white.png" alt="Restaurant Kornmark" style="height: 56px; width: auto; margin-bottom: 18px; opacity: 0.95;" />
       <p style="font-size: 14px; max-width: 360px; opacity: 0.85; font-weight: 300; line-height: 1.7;">
-        Lille Østergade 3, 7500 Holstebro.<br>
-        Casual fine dining bag klippen.<br>
-        Tre stjerner i Den Danske Spiseguide.
+        Nørreport 155, 7500 Holstebro.<br>
+        Casual fine dining ved marken.<br>
+        Vestjysk råvarekøkken.
       </p>
     </div>
     <div>
@@ -879,8 +875,8 @@
     <div>
       <h4>Praktisk</h4>
       <ul>
-        <li><a href="https://underklippen.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
-        <li><a href="https://giftcard.superbexperience.com/underklippen" target="_blank" rel="noopener">Gavekort</a></li>
+        <li><a href="https://kornmark.superbexperience.com/reserve/experience" target="_blank" rel="noopener">Book bord</a></li>
+        <li><a href="https://giftcard.superbexperience.com/kornmark" target="_blank" rel="noopener">Gavekort</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
@@ -888,15 +884,16 @@
     <div>
       <h4>Følg med</h4>
       <ul>
-        <li><a href="https://www.instagram.com/underklippen/" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="https://www.facebook.com/underklippen" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="#">Nyhedsbrev</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-base">
-    <span>© 2026 Restaurant Under Klippen</span>
-    <span>Lille Østergade 3 · 7500 Holstebro · +45 97 40 66 55</span>
+    <span>© 2026 Restaurant Kornmark</span>
+    <span>Nørreport 155 · 7500 Holstebro · +45 12 34 56 78</span>
+  </div>
+  <div class="footer-base" style="justify-content: center; margin-top: 12px;">
+    <span>Demo — fiktiv virksomhed lavet af <a href="https://kinly.dk" target="_blank" rel="noopener" style="color: var(--c-accent);">Kinly</a></span>
   </div>
 </footer>
 

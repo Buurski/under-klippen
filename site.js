@@ -1,4 +1,4 @@
-/* Under Klippen — shared site behavior */
+/* Restaurant Kornmark — shared site behavior */
 
 (function () {
   'use strict';
